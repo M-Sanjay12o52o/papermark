@@ -198,13 +198,13 @@ export default function LinksTable() {
                                   onClick={
                                     link.domainId
                                       ? () =>
-                                          handleCopyToClipboard(
-                                            `https://${link.domainSlug}/${link.slug}`,
-                                          )
+                                        handleCopyToClipboard(
+                                          `https://${link.domainSlug}/${link.slug}`,
+                                        )
                                       : () =>
-                                          handleCopyToClipboard(
-                                            `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/view/${link.id}`,
-                                          )
+                                        handleCopyToClipboard(
+                                          `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/view/${link.id}`,
+                                        )
                                   }
                                   title="Copy to clipboard"
                                 >
@@ -345,84 +345,84 @@ export default function LinksTable() {
                     <TableBody>
                       {links
                         ? links
-                            .filter((link) => link.isArchived)
-                            .map((link) => (
-                              <>
-                                <TableRow key={link.id} className="group/row">
-                                  <TableCell className="hidden sm:table-cell truncate w-[220px]">
-                                    {link.name || "No link name"}
-                                  </TableCell>
-                                  <TableCell className="max-w-[150px] sm:min-w-[450px]">
-                                    <div className="flex items-center gap-x-4 rounded-md text-secondary-foreground bg-secondary group-hover/row:ring-1 group-hover/row:ring-gray-400 group-hover/row:dark:ring-gray-100 px-3 py-1">
-                                      <div className="whitespace-nowrap hidden sm:flex text-sm">
-                                        {link.domainId
-                                          ? `https://${link.domainSlug}/${link.slug}`
-                                          : `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/view/${link.id}`}
-                                      </div>
-                                      <div className="flex sm:hidden whitespace-nowrap text-sm truncate">{`${link.id}`}</div>
+                          .filter((link) => link.isArchived)
+                          .map((link) => (
+                            <>
+                              <TableRow key={link.id} className="group/row">
+                                <TableCell className="hidden sm:table-cell truncate w-[220px]">
+                                  {link.name || "No link name"}
+                                </TableCell>
+                                <TableCell className="max-w-[150px] sm:min-w-[450px]">
+                                  <div className="flex items-center gap-x-4 rounded-md text-secondary-foreground bg-secondary group-hover/row:ring-1 group-hover/row:ring-gray-400 group-hover/row:dark:ring-gray-100 px-3 py-1">
+                                    <div className="whitespace-nowrap hidden sm:flex text-sm">
+                                      {link.domainId
+                                        ? `https://${link.domainSlug}/${link.slug}`
+                                        : `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/view/${link.id}`}
                                     </div>
-                                  </TableCell>
-                                  <TableCell>
-                                    <div className="flex items-center space-x-1 [&[data-state=open]>svg.chevron]:rotate-180">
-                                      <BarChart className="h-4 w-4 text-gray-400" />
-                                      <p className="whitespace-nowrap text-sm text-gray-400">
-                                        {nFormatter(link._count.views)}
-                                        <span className="ml-1 hidden sm:inline-block">
-                                          views
-                                        </span>
-                                      </p>
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="text-sm text-gray-400">
-                                    {link.views[0] ? (
-                                      <time
-                                        dateTime={new Date(
-                                          link.views[0].viewedAt,
-                                        ).toISOString()}
+                                    <div className="flex sm:hidden whitespace-nowrap text-sm truncate">{`${link.id}`}</div>
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex items-center space-x-1 [&[data-state=open]>svg.chevron]:rotate-180">
+                                    <BarChart className="h-4 w-4 text-gray-400" />
+                                    <p className="whitespace-nowrap text-sm text-gray-400">
+                                      {nFormatter(link._count.views)}
+                                      <span className="ml-1 hidden sm:inline-block">
+                                        views
+                                      </span>
+                                    </p>
+                                  </div>
+                                </TableCell>
+                                <TableCell className="text-sm text-gray-400">
+                                  {link.views[0] ? (
+                                    <time
+                                      dateTime={new Date(
+                                        link.views[0].viewedAt,
+                                      ).toISOString()}
+                                    >
+                                      {timeAgo(link.views[0].viewedAt)}
+                                    </time>
+                                  ) : (
+                                    "-"
+                                  )}
+                                </TableCell>
+                                <TableCell className="text-center sm:text-right">
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button
+                                        variant="ghost"
+                                        className="h-8 w-8 p-0"
                                       >
-                                        {timeAgo(link.views[0].viewedAt)}
-                                      </time>
-                                    ) : (
-                                      "-"
-                                    )}
-                                  </TableCell>
-                                  <TableCell className="text-center sm:text-right">
-                                    <DropdownMenu>
-                                      <DropdownMenuTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          className="h-8 w-8 p-0"
-                                        >
-                                          <span className="sr-only">
-                                            Open menu
-                                          </span>
-                                          <MoreHorizontal className="h-4 w-4" />
-                                        </Button>
-                                      </DropdownMenuTrigger>
-                                      <DropdownMenuContent align="end">
-                                        <DropdownMenuLabel>
-                                          Actions
-                                        </DropdownMenuLabel>
+                                        <span className="sr-only">
+                                          Open menu
+                                        </span>
+                                        <MoreHorizontal className="h-4 w-4" />
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                      <DropdownMenuLabel>
+                                        Actions
+                                      </DropdownMenuLabel>
 
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem
-                                          className="text-destructive focus:bg-destructive focus:text-destructive-foreground"
-                                          onClick={() =>
-                                            handleArchiveLink(
-                                              link.id,
-                                              link.documentId,
-                                              link.isArchived,
-                                            )
-                                          }
-                                        >
-                                          Reactivate
-                                        </DropdownMenuItem>
-                                      </DropdownMenuContent>
-                                    </DropdownMenu>
-                                  </TableCell>
-                                </TableRow>
-                              </>
-                            ))
+                                      <DropdownMenuSeparator />
+                                      <DropdownMenuItem
+                                        className="text-destructive focus:bg-destructive focus:text-destructive-foreground"
+                                        onClick={() =>
+                                          handleArchiveLink(
+                                            link.id,
+                                            link.documentId,
+                                            link.isArchived,
+                                          )
+                                        }
+                                      >
+                                        Reactivate
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </TableCell>
+                              </TableRow>
+                            </>
+                          ))
                         : null}
                     </TableBody>
                   </Table>
